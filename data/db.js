@@ -18,8 +18,10 @@ function find() {
 }
 
 function findById(id) {
-  return db('posts').where({ id: Number(id) });
+  return db('posts').where({ id: Number(id) }).first();
 }
+//added .first() on the end from help channel thread
+// What that will do is automatically take the first index of the array. If there is no first, it will return nothing.
 
 function insert(post) {
   return db('posts')
@@ -43,7 +45,7 @@ function findPostComments(postId) {
   return db('comments')
     .join('posts', 'posts.id', 'post_id')
     .select('comments.*', 'title as post')
-    .where('post_id', postId);
+    .where('post_id', postId)
 }
 
 function findCommentById(id) {
